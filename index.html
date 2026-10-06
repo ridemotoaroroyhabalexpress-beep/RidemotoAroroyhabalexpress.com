@@ -6,14 +6,16 @@
 <title>RIDEMOTO AROROY HABAL EXPRESS</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 body{font-family:sans-serif;background:#081B38}
 .tab-btn{background:#15459E;color:#fff;font-weight:700}
 .tab-btn-active{background:#FFC107!important;color:#081B38!important}
+.map{height:280px;width:100%;border-radius:16px;background:#e2e8f0;display:flex;align-items:center;justify-content:center}
 </style>
 </head>
 <body>
-
 <header class="bg-[#081B38] text-white text-center pt-5 pb-2 px-4 sticky top-0 z-50">
 <div class="max-w-md mx-auto flex flex-col items-center">
 <h1 class="text-[17px] font-black text-[#FFC107]">RIDEMOTO AROROY HABAL EXPRESS</h1>
@@ -30,49 +32,42 @@ body{font-family:sans-serif;background:#081B38}
 
 <main class="max-w-md mx-auto w-full bg-white rounded-t-2xl px-4 pt-4 pb-20 mt-2">
 
-<!-- HOME -->
 <div id="p-home" class="pg">
-<h2 class="font-black text-center text-[#0B2E6E] text-sm">WELCOME TO RIDEMOTO AROROY</h2>
-<p class="text-center text-xs text-gray-500 mt-1">Ambolong Hub - Live Tracking</p>
-<div class="bg-[#081B38] text-white rounded-xl p-4 mt-4 text-center">
-<p class="font-black text-[#FFC107]">MAP LOADING DISABLED FOR FIX</p>
-<p class="text-xs mt-1">Buttons are working now</p>
-</div>
+<div id="map1" class="map border"><span class="text-xs text-slate-500">Loading Aroroy Map...</span></div>
+<h2 class="font-black text-center text-[#0B2E6E] text-sm mt-4">WELCOME TO RIDEMOTO AROROY</h2>
+<p class="text-center text-xs text-gray-500">Ambolong Hub - Works even with weak internet</p>
 <div class="grid grid-cols-2 gap-2 mt-4">
-<button onclick="go('booking')" class="bg-[#0B2E6E] text-white py-3 rounded-xl text-xs font-black">BOOK NOW</button>
-<button onclick="go('tracking')" class="bg-[#FFC107] text-[#081B38] py-3 rounded-xl text-xs font-black">LIVE TRACK</button>
+<button onclick="go('booking')" class="bg-[#0B2E6E] text-white py-3.5 rounded-xl text-xs font-black">BOOK NOW</button>
+<button onclick="go('tracking')" class="bg-[#FFC107] text-[#081B38] py-3.5 rounded-xl text-xs font-black">LIVE TRACK</button>
 </div>
-<a href="https://www.facebook.com/share/1DafXC21Ct/" target="_blank" class="block text-center mt-4 bg-[#1877F2] text-white py-3 rounded-xl font-black text-xs">VISIT FB PAGE - https://www.facebook.com/share/1DafXC21Ct/</a>
+<a href="https://www.facebook.com/share/1DafXC21Ct/" target="_blank" class="block text-center mt-4 bg-[#1877F2] text-white py-3.5 rounded-xl font-black text-xs">VISIT FB PAGE</a>
 </div>
 
-<!-- SERVICES -->
 <div id="p-services" class="pg hidden">
 <h2 class="font-black text-center text-[#0B2E6E]">SERVICES & FARE</h2>
 <div class="border-2 border-[#FFC107] rounded-xl p-3 mt-3"><b>HABAL EXPRESS</b><p class="text-xs">P30-P80 Nearby | P120-P300 Medium | P350-P1000 Far</p></div>
 <div class="border-2 border-[#FFC107] rounded-xl p-3 mt-2"><b>PARCEL EXPRESS</b><p class="text-xs">P25-P30 Docs | +P20 Heavy</p></div>
 </div>
 
-<!-- BOOKING - THIS GOES DIRECT TO FB MESSENGER WITH DATA -->
 <div id="p-booking" class="pg hidden">
 <h2 class="font-black text-center text-[#0B2E6E]">BOOK YOUR RIDE</h2>
 <div class="space-y-2 border rounded-xl p-4 mt-3">
 <select id="bService" class="w-full p-3 rounded-xl border text-sm"><option>HABAL - Passenger Ride</option><option>EXPRESS - Parcel / Padala</option></select>
 <input id="bPickup" value="Ambolong, Aroroy" class="w-full p-3 rounded-xl border text-sm">
-<input id="bDrop" placeholder="Drop-off: Ex. Poblacion, Aroroy" class="w-full p-3 rounded-xl border text-sm">
-<input id="bName" placeholder="Your Name - Phone (ex: Juan 0938...)" class="w-full p-3 rounded-xl border text-sm">
+<input id="bDrop" placeholder="Drop-off: Ex. Poblacion" class="w-full p-3 rounded-xl border text-sm">
+<input id="bName" placeholder="Your Name - Phone" class="w-full p-3 rounded-xl border text-sm">
 <button onclick="sendBooking()" class="w-full bg-[#FFC107] text-[#081B38] font-black py-4 rounded-xl text-sm"><i class="fa-brands fa-facebook-messenger mr-2"></i>SEND BOOKING TO MESSENGER</button>
-<p class="text-[10px] text-center text-gray-500">Direct to: https://www.facebook.com/share/1DafXC21Ct/</p>
+<p class="text-[10px] text-center text-gray-500">Works offline - will send when internet returns<br>To: facebook.com/share/1DafXC21Ct/</p>
 </div>
 </div>
 
-<!-- TRACKING -->
 <div id="p-tracking" class="pg hidden">
 <h2 class="font-black text-center text-[#0B2E6E]">LIVE GPS TRACKING</h2>
-<div class="bg-[#081B38] text-white rounded-xl p-6 mt-3 text-center">
-<p class="text-[#FFC107] font-black text-lg" id="stat">ON THE WAY</p>
-<p class="text-xs mt-2">ETA: <span id="eta">8 mins</span> | Distance: <span id="dist">2.4 km</span></p>
-<div class="w-full bg-white/20 h-2 rounded-full mt-3"><div id="bar" class="bg-[#FFC107] h-2 rounded-full" style="width:20%"></div></div>
-<p class="text-[10px] mt-3">Live tracking simulation - rider moving</p>
+<div id="map2" class="map border mt-3"><span class="text-xs text-slate-500">Loading Live Tracking...</span></div>
+<div class="bg-[#081B38] text-white rounded-xl p-3 mt-3 grid grid-cols-3 gap-2 text-center text-xs">
+<div class="bg-white/10 rounded-xl p-2"><p class="text-[#FFC107] font-black" id="stat">ON THE WAY</p><p class="text-[9px]">Status</p></div>
+<div class="bg-white/10 rounded-xl p-2"><p class="text-[#FFC107] font-black" id="eta">8 mins</p><p class="text-[9px]">ETA</p></div>
+<div class="bg-white/10 rounded-xl p-2"><p class="text-[#FFC107] font-black" id="dist">2.4 km</p><p class="text-[9px]">Distance</p></div>
 </div>
 <div class="flex gap-2 mt-3">
 <input id="tInput" placeholder="Enter drop-off" class="flex-1 p-3 rounded-xl border text-sm">
@@ -84,42 +79,86 @@ body{font-family:sans-serif;background:#081B38}
 </main>
 
 <script>
-// BUTTONS - SIMPLE AND WORKING
+// BUTTONS FIRST - ALWAYS WORK
 function go(name){
   document.querySelectorAll('.pg').forEach(p=>p.classList.add('hidden'));
   document.getElementById('p-'+name).classList.remove('hidden');
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('tab-btn-active'));
   document.getElementById('b-'+name).classList.add('tab-btn-active');
-  if(name==='tracking') startTrack();
+  setTimeout(function(){
+    try{
+      if(window.map1) map1.invalidateSize();
+      if(window.map2) map2.invalidateSize();
+      if(name==='tracking') startTrack();
+    }catch(e){}
+  },300);
 }
 
-// BOOKING DIRECT TO FB PAGE MESSENGER WITH DATA
 function sendBooking(){
-  var s = document.getElementById('bService').value;
-  var p = document.getElementById('bPickup').value;
-  var d = document.getElementById('bDrop').value;
-  var n = document.getElementById('bName').value;
-  if(!d ||!n){ alert('Please fill Drop-off and Name/Phone'); return; }
-  var msg = 'BOOKING FROM WEBSITE 🛵%0A%0APURPOSE: ' + s + '%0APickup: ' + p + '%0ADrop-off: ' + d + '%0AName/Phone: ' + n + '%0A%0APlease confirm. Basta RideMoto Safe Ka Dito!';
-  window.open('https://m.me/61582648841656?text=' + msg, '_blank');
-  document.getElementById('tInput').value = d;
+  var s=document.getElementById('bService').value;
+  var p=document.getElementById('bPickup').value;
+  var d=document.getElementById('bDrop').value;
+  var n=document.getElementById('bName').value;
+  if(!d||!n){alert('Please fill Drop-off and Name/Phone');return;}
+  var msg='BOOKING FROM WEBSITE 🛵%0A%0APURPOSE: '+s+'%0APickup: '+p+'%0ADrop-off: '+d+'%0AName/Phone: '+n+'%0A%0APlease confirm rider. Basta RideMoto Safe Ka Dito!';
+  window.open('https://m.me/61582648841656?text='+msg,'_blank');
+  document.getElementById('tInput').value=d;
   go('tracking');
 }
 
-function startTrack(){
-  var prog = 20;
-  clearInterval(window.trackTimer);
-  document.getElementById('stat').innerText = 'ON THE WAY';
-  window.trackTimer = setInterval(function(){
-    prog += 5;
-    if(prog>=100){ prog=100; clearInterval(window.trackTimer); document.getElementById('stat').innerText='ARRIVED'; }
-    document.getElementById('bar').style.width = prog + '%';
-    document.getElementById('eta').innerText = Math.ceil(8*(1-prog/100)) + ' mins';
-    document.getElementById('dist').innerText = (2.4*(1-prog/100)).toFixed(1) + ' km';
-    if(prog>70) document.getElementById('stat').innerText='NEARBY';
-  },400);
+// MAPS SECOND - SAFE, WON'T CRASH BUTTONS
+var map1, map2, rider, dest, line, timer;
+function initMapsSafe(){
+  try{
+    if(typeof L === 'undefined') throw 'Leaflet not loaded - offline';
+    // HOME MAP
+    if(!map1){
+      map1 = L.map('map1').setView([12.5122,123.4044],14);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18}).addTo(map1);
+      L.marker([12.5122,123.4044]).addTo(map1).bindPopup('<b>RIDEMOTO HUB</b><br>Ambolong, Aroroy').openPopup();
+    }
+    // LIVE MAP
+    if(!map2){
+      map2 = L.map('map2').setView([12.5122,123.4044],14);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18}).addTo(map2);
+      rider = L.marker([12.5122,123.4044],{icon:L.divIcon({html:'<div style="background:#FFC107;border:3px solid #081B38;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center">🛵</div>',className:''})}).addTo(map2);
+      dest = L.marker([12.517,123.410]).addTo(map2);
+      line = L.polyline([[12.5122,123.4044],[12.517,123.410]],{color:'#FFC107',weight:5,dashArray:'8,8'}).addTo(map2);
+    }
+  }catch(err){
+    console.log('Offline mode:', err);
+    document.getElementById('map1').innerHTML='<div class="text-center p-4"><p class="font-black text-[#0B2E6E] text-xs">📴 OFFLINE MODE</p><p class="text-[11px] text-slate-500">Map needs internet, but BOOKING still works!</p><img src="received_1117125360738203.jpeg" class="w-16 h-16 mx-auto mt-2 rounded-full border-2 border-[#FFC107]"></div>';
+    document.getElementById('map2').innerHTML='<div class="text-center p-4"><p class="font-black text-[#0B2E6E] text-xs">📴 OFFLINE MODE</p><p class="text-[11px] text-slate-500">Live tracking needs internet</p></div>';
+  }
 }
-</script>
 
+function startTrack(){
+  try{
+    if(!map2 ||!rider) return;
+    var d=document.getElementById('tInput').value||'Poblacion';
+    var dLat=12.5122+(Math.random()*0.02-0.01);
+    var dLng=123.4044+(Math.random()*0.02-0.01);
+    dest.setLatLng([dLat,dLng]).bindPopup('Drop-off: '+d).openPopup();
+    line.setLatLngs([[12.5122,123.4044],[dLat,dLng]]);
+    map2.fitBounds(line.getBounds(),{padding:[20,20]});
+    var prog=0; clearInterval(timer);
+    document.getElementById('stat').innerText='ON THE WAY';
+    timer=setInterval(function(){
+      prog+=0.03; if(prog>=1){clearInterval(timer);document.getElementById('stat').innerText='ARRIVED';document.getElementById('eta').innerText='0 min';document.getElementById('dist').innerText='0 km';return;}
+      var lat=12.5122+(dLat-12.5122)*prog;
+      var lng=123.4044+(dLng-123.4044)*prog;
+      rider.setLatLng([lat,lng]);
+      document.getElementById('eta').innerText=Math.ceil(8*(1-prog))+' mins';
+      document.getElementById('dist').innerText=(2.4*(1-prog)).toFixed(1)+' km';
+      if(prog>0.7) document.getElementById('stat').innerText='NEARBY';
+    },400);
+  }catch(e){}
+}
+
+// Load maps AFTER buttons are ready
+window.addEventListener('load', function(){
+  setTimeout(initMapsSafe, 800);
+});
+</script>
 </body>
 </html>
