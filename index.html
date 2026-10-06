@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RIDEMOTO AROROY HABAL EXPRESS - Live Tracking</title>
+<title>RIDEMOTO AROROY HABAL EXPRESS</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{navy:{DEFAULT:'#0B2E6E',dark:'#081B38'},gold:{DEFAULT:'#FFC107'}}}}}</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,12 +11,11 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 body{font-family:Inter,sans-serif;background:#081B38;padding-bottom:80px}
-.map{height:280px;width:100%;border-radius:0.75rem;z-index:1}
+.map{height:280px;width:100%;border-radius:12px;z-index:1}
 .tab-btn{background:#15459E;color:#fff;font-weight:700}
 .tab-btn-active{background:#FFC107!important;color:#081B38!important;font-weight:900!important}
-.pill-btn-gold{background:#FFC107;color:#081B38;font-weight:900}
 .pulse{animation:pulse 1.5s infinite}
-@keyframes pulse{0%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:.6}100%{transform:scale(1);opacity:1}}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
 </style>
 </head>
 <body>
@@ -25,7 +24,7 @@ body{font-family:Inter,sans-serif;background:#081B38;padding-bottom:80px}
   <div class="max-w-md mx-auto flex flex-col items-center">
     <h1 class="text-[18px] font-black text-[#FFC107] leading-tight">RIDEMOTO AROROY HABAL EXPRESS</h1>
     <p class="text-[11px] font-extrabold mt-1 mb-2">"BASTA RIDEMOTO, SAFE KA DITO!"</p>
-    <img src="logo.png" class="w-24 h-24 mb-3 rounded-full border-4 border-[#FFC107] bg-white object-cover">
+    <img src="logo.png" class="w-24 h-24 mb-3 rounded-full border-4 border-[#FFC107] bg-white object-cover" onerror="this.src='https://via.placeholder.com/150/0B2E6E/FFC107?text=RideMoto'">
   </div>
   <div class="max-w-md mx-auto grid grid-cols-4 gap-1.5">
     <button onclick="switchTab('home')" id="tab-home" class="py-2.5 text-[10px] rounded-xl tab-btn tab-btn-active">HOME</button>
@@ -40,34 +39,36 @@ body{font-family:Inter,sans-serif;background:#081B38;padding-bottom:80px}
 <!-- HOME -->
 <section id="page-home" class="page-view space-y-4">
   <div id="homeMap" class="map border"></div>
-  <div class="text-center"><h2 class="font-black text-[#0B2E6E] uppercase text-sm">WELCOME TO RIDEMOTO AROROY HABAL EXPRESS</h2><p class="text-xs text-slate-600 mt-1">Ambolong Hub • Live GPS Tracking Available</p></div>
+  <div class="text-center"><h2 class="font-black text-[#0B2E6E] uppercase text-sm">WELCOME TO RIDEMOTO AROROY HABAL EXPRESS</h2><p class="text-xs text-slate-600 mt-1">Ambolong Hub • Live GPS Tracking</p></div>
   <div class="grid grid-cols-2 gap-2"><button onclick="switchTab('booking')" class="bg-[#0B2E6E] text-white py-3.5 rounded-2xl text-xs font-black uppercase">BOOK NOW</button><button onclick="switchTab('tracking')" class="bg-[#FFC107] text-[#081B38] py-3.5 rounded-2xl text-xs font-black uppercase">LIVE TRACK</button></div>
-  <a href="https://www.facebook.com/share/1DafXC21Ct/" target="_blank" class="block text-center text-xs font-bold text-[#0B2E6E] underline"><i class="fa-brands fa-facebook mr-1"></i>Visit Facebook Page</a>
+  <a href="https://www.facebook.com/share/1DafXC21Ct/" target="_blank" class="block text-center text-xs font-bold text-[#0B2E6E] underline"><i class="fa-brands fa-facebook mr-1"></i>facebook.com - RideMoto Aroroy</a>
 </section>
 
 <!-- SERVICES -->
 <section id="page-services" class="page-view hidden space-y-3">
-  <h2 class="font-black text-center text-[#0B2E6E] uppercase">FARE MATRIX</h2>
-  <div class="border-2 border-[#FFC107] rounded-2xl p-3"><b class="text-[#0B2E6E] text-sm">🛵 HABAL EXPRESS</b><p class="text-xs">P30-P80 Nearby | P120-P300 Medium | P350-P1000 Far</p></div>
-  <div class="border-2 border-[#FFC107] rounded-2xl p-3"><b class="text-[#0B2E6E] text-sm">📦 PARCEL EXPRESS</b><p class="text-xs">P25-P30 Docs | +P20-P50 Heavy</p></div>
+  <h2 class="font-black text-center text-[#0B2E6E] uppercase">SERVICES & FARE</h2>
+  <div class="border-2 border-[#FFC107] rounded-2xl p-3"><b class="text-[#0B2E6E] text-sm">🛵 HABAL EXPRESS</b><p class="text-xs">P30-P80 Nearby | P120-P300 Medium | P350-P1000 Far Areas</p></div>
+  <div class="border-2 border-[#FFC107] rounded-2xl p-3"><b class="text-[#0B2E6E] text-sm">📦 PARCEL EXPRESS</b><p class="text-xs">P25-P30 Docs | +P20-P50 Heavy/Bulk</p></div>
+  <div class="bg-[#081B38] text-white rounded-2xl p-3 text-xs"><p class="text-[#FFC107] font-black text-center mb-1">FIXED FARE FROM AMBOLONG HUB</p><p>• Talabaan P30 • Bangon P50 • Puro P70<br>• Panique P120 • Balawing P200 • Luy-a P250<br>• Nabongsuran P350 • San Agustin P600 • Tinigban P800</p></div>
 </section>
 
-<!-- BOOKING -->
+<!-- BOOKING - NO RE-TYPE -->
 <section id="page-booking" class="page-view hidden space-y-3">
   <h2 class="font-black text-center text-[#0B2E6E] uppercase">BOOK YOUR RIDE</h2>
+  <p class="text-center text-[11px] text-slate-500">Type once here → Auto-filled in Facebook Messenger</p>
   <div class="space-y-3 border rounded-2xl p-4">
-    <select id="bService" class="w-full p-3 rounded-xl border text-sm font-bold"><option>HABAL - Passenger</option><option>EXPRESS - Parcel</option></select>
+    <select id="bService" class="w-full p-3 rounded-xl border text-sm font-bold"><option>HABAL - Passenger Ride</option><option>EXPRESS - Parcel / Padala</option></select>
     <input id="bPickup" value="Ambolong, Aroroy" class="w-full p-3 rounded-xl border text-sm">
     <input id="bDrop" placeholder="Drop-off: Ex. Poblacion, Aroroy" class="w-full p-3 rounded-xl border text-sm">
-    <input id="bName" placeholder="Name - Phone (0938...)" class="w-full p-3 rounded-xl border text-sm">
-    <button onclick="bookNow()" class="w-full bg-[#FFC107] text-[#081B38] font-black py-4 rounded-xl text-sm uppercase"><i class="fa-brands fa-facebook-messenger mr-2"></i>SEND TO FACEBOOK</button>
+    <input id="bName" placeholder="Your Name - Phone (ex: Juan 0938...)" class="w-full p-3 rounded-xl border text-sm">
+    <button onclick="bookNow()" class="w-full bg-[#FFC107] text-[#081B38] font-black py-4 rounded-xl text-sm uppercase"><i class="fa-brands fa-facebook-messenger mr-2"></i>SEND BOOKING - NO RE-TYPE</button>
+    <p class="text-[10px] text-center text-slate-500">Details will be auto-filled in Messenger, just click SEND</p>
   </div>
 </section>
 
-<!-- LIVE TRACKING - LOOKS LIVE -->
+<!-- LIVE TRACKING -->
 <section id="page-tracking" class="page-view hidden space-y-4">
-  <div class="text-center"><h2 class="font-black text-[#0B2E6E] uppercase">LIVE GPS TRACKING</h2><p class="text-xs text-slate-500">Track your rider in real-time</p></div>
-
+  <div class="text-center"><h2 class="font-black text-[#0B2E6E] uppercase">LIVE GPS TRACKING</h2><p class="text-xs text-slate-500">Watch your rider move in real-time</p></div>
   <div class="bg-[#081B38] rounded-2xl p-3 space-y-2">
     <div id="liveMap" class="map"></div>
     <div class="grid grid-cols-3 gap-2 text-center text-white text-xs">
@@ -76,23 +77,17 @@ body{font-family:Inter,sans-serif;background:#081B38;padding-bottom:80px}
       <div class="bg-white/10 rounded-xl p-2"><p class="text-[#FFC107] font-black" id="liveDist">2.4 km</p><p class="text-[10px]">Distance</p></div>
     </div>
     <div class="flex items-center gap-2 bg-white rounded-xl p-2.5">
-      <img src="logo.png" class="w-10 h-10 rounded-full border-2 border-[#FFC107]">
-      <div class="flex-1"><p class="font-black text-[#0B2E6E] text-xs">Rider: Kuya Rider</p><p class="text-[11px] text-slate-500"><i class="fa-solid fa-motorcycle mr-1"></i>Moving • Plate ABC-123 • <span class="text-green-600 font-bold">● Live</span></p></div>
+      <img src="logo.png" class="w-10 h-10 rounded-full border-2 border-[#FFC107] bg-white">
+      <div class="flex-1"><p class="font-black text-[#0B2E6E] text-xs">Rider: Kuya Rider</p><p class="text-[11px] text-slate-500"><i class="fa-solid fa-motorcycle mr-1"></i>Moving • <span class="text-green-600 font-bold">● Live GPS</span></p></div>
       <div class="w-3 h-3 bg-green-500 rounded-full pulse"></div>
     </div>
   </div>
-
-  <div class="space-y-2">
-    <label class="text-xs font-bold text-[#0B2E6E]">Enter Booking Name / Drop-off to Simulate Live Track</label>
-    <div class="flex gap-2"><input id="trackInput" placeholder="Ex. Poblacion" class="flex-1 p-3 rounded-xl border text-sm"><button onclick="startLiveTrack()" class="bg-[#0B2E6E] text-white px-5 rounded-xl font-black text-xs uppercase">TRACK</button></div>
-    <button onclick="shareLocation()" class="w-full bg-[#FFC107] text-[#081B38] font-black py-3 rounded-xl text-xs uppercase"><i class="fa-solid fa-location-dot mr-2"></i>SHARE MY LIVE LOCATION (GOOGLE MAPS)</button>
-  </div>
-
-  <div class="bg-slate-50 border rounded-2xl p-4 space-y-3">
-    <h3 class="font-black text-[#0B2E6E] text-xs uppercase text-center">Contact via Facebook</h3>
-    <a href="https://www.facebook.com/share/1DafXC21Ct/" target="_blank" class="block w-full bg-[#1877F2] text-white font-black py-3 rounded-xl text-center text-sm uppercase"><i class="fa-brands fa-facebook-messenger mr-2"></i>Chat on Messenger</a>
+  <div class="flex gap-2"><input id="trackInput" placeholder="Enter drop-off to track" class="flex-1 p-3 rounded-xl border text-sm"><button onclick="startLiveTrack()" class="bg-[#0B2E6E] text-white px-5 rounded-xl font-black text-xs">TRACK</button></div>
+  <div class="bg-slate-50 border rounded-2xl p-4 space-y-2">
+    <h3 class="font-black text-[#0B2E6E] text-xs uppercase text-center">CONTACT US VIA FACEBOOK</h3>
+    <a href="https://www.facebook.com/share/1DafXC21Ct/" target="_blank" class="block w-full bg-[#1877F2] text-white font-black py-3 rounded-xl text-center text-sm uppercase"><i class="fa-brands fa-facebook-messenger mr-2"></i>Message Us - Auto Booking</a>
     <a href="https://www.facebook.com/share/1DafXC21Ct/" target="_blank" class="block w-full bg-[#FFC107] text-[#081B38] font-black py-3 rounded-xl text-center text-sm uppercase"><i class="fa-brands fa-facebook mr-2"></i>Visit Facebook Page</a>
-    <p class="text-[10px] text-center text-slate-500">RIDEMOTO AROROY HABAL EXPRESS<br>Ambolong, Aroroy, Masbate</p>
+    <p class="text-[10px] text-center text-slate-500">RIDEMOTO AROROY HABAL EXPRESS<br>All bookings auto-save to Page Inbox</p>
   </div>
 </section>
 
@@ -107,20 +102,17 @@ function switchTab(t){
   window.scrollTo(0,0);
   setTimeout(()=>{ homeMap.invalidateSize(); liveMap.invalidateSize(); },300);
 }
-// HOME MAP
 let homeMap = L.map('homeMap').setView([12.5122, 123.4044], 14);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(homeMap);
-L.marker([12.5122, 123.4044]).addTo(homeMap).bindPopup('<b>RIDEMOTO AROROY HABAL EXPRESS HUB</b>').openPopup();
+L.marker([12.5122, 123.4044]).addTo(homeMap).bindPopup('<b>RIDEMOTO AROROY HABAL EXPRESS</b><br>Ambolong Hub').openPopup();
 
-// LIVE MAP
 let liveMap = L.map('liveMap').setView([12.5122, 123.4044], 14);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(liveMap);
-let riderMarker = L.marker([12.5122, 123.4044], {icon: L.divIcon({html:'<div style="background:#FFC107;border:3px solid #081B38;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:14px">🛵</div>', className:''})}).addTo(liveMap);
-let hubMarker = L.marker([12.5122, 123.4044]).addTo(liveMap).bindPopup('Hub: Ambolong');
+let riderMarker = L.marker([12.5122, 123.4044], {icon: L.divIcon({html:'<div style="background:#FFC107;border:3px solid #081B38;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center">🛵</div>', className:''})}).addTo(liveMap);
 let destMarker = L.marker([12.517, 123.410]).addTo(liveMap);
 let routeLine = L.polyline([[12.5122,123.4044],[12.517,123.410]], {color:'#FFC107', weight:5, dashArray:'10,10'}).addTo(liveMap);
-
 let liveInterval;
+
 function startLiveTrack(){
   const dest = document.getElementById('trackInput').value || 'Poblacion';
   const destLat = 12.5122 + (Math.random()*0.02 - 0.01);
@@ -128,13 +120,9 @@ function startLiveTrack(){
   destMarker.setLatLng([destLat, destLng]).bindPopup('Drop-off: '+dest).openPopup();
   routeLine.setLatLngs([[12.5122,123.4044],[destLat,destLng]]);
   liveMap.fitBounds(routeLine.getBounds(), {padding:[20,20]});
-
-  let progress = 0;
-  let eta = 8;
+  let progress = 0, eta = 8;
   clearInterval(liveInterval);
   document.getElementById('liveStatus').innerText = 'ON THE WAY';
-  document.getElementById('liveStatus').className = 'text-[#FFC107] font-black';
-
   liveInterval = setInterval(()=>{
     progress += 0.02;
     if(progress>=1){ progress=1; clearInterval(liveInterval); document.getElementById('liveStatus').innerText='ARRIVED'; document.getElementById('liveETA').innerText='0 min'; document.getElementById('liveDist').innerText='0 km'; return; }
@@ -146,45 +134,27 @@ function startLiveTrack(){
     if(progress>0.7) document.getElementById('liveStatus').innerText='NEARBY';
   }, 400);
 }
-function shareLocation(){
-  // Opens Google Maps live location sharing
-  if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(pos=>{
-      const lat=pos.coords.latitude, lng=pos.coords.longitude;
-      window.open(`https://www.google.com/maps?q=${lat},${lng}`, '_blank');
-      window.open(`https://www.facebook.com/share/1DafXC21Ct/`, '_blank');
-    });
-  } else {
-    window.open('https://www.google.com/maps/place/Ambolong,+Aroroy,+Masbate', '_blank');
-  }
-}
+
 function bookNow(){
   const s = document.getElementById('bService').value;
   const p = document.getElementById('bPickup').value;
   const d = document.getElementById('bDrop').value;
   const n = document.getElementById('bName').value;
-  
-  if(!d || !n){ 
-    alert('Please fill Drop-off and Name/Phone'); 
-    return; 
-  }
+  if(!d ||!n){ alert('Please fill Drop-off and Name/Phone'); return; }
 
-  // 1. AUTO SAVE TO GOOGLE SHEET (optional - create sheet if you want)
-  // You can add your Web App URL here later
-  
-  // 2. AUTO-FILL FACEBOOK MESSAGE - NO RE-TYPE NEEDED
-  const fullMessage = `Hello RIDEMOTO AROROY HABAL EXPRESS! 🛵%0A%0A📝 NEW BOOKING:%0A━━━━━━━━━━━━━━━%0AService: ${s}%0APickup: ${p}%0ADrop-off: ${d}%0AName/Phone: ${n}%0A%0ABooking from website: https://your-site.github.io%0A━━━━━━━━━━━━━━━%0ABasta RideMoto, Safe Ka Dito!`;
+  // NO RE-TYPE - Auto-filled message
+  const fullMessage = `Hello RIDEMOTO AROROY HABAL EXPRESS! 🛵%0A%0A📝 NEW BOOKING:%0A━━━━━━━━━━━━━━━%0AService: ${s}%0APickup: ${p}%0ADrop-off: ${d}%0AName/Phone: ${n}%0A%0ABooking from website%0A━━━━━━━━━━━━━━━%0ABasta RideMoto, Safe Ka Dito!`;
 
-  // 3. OPEN YOUR FACEBOOK PAGE WITH MESSAGE READY - CUSTOMER JUST CLICKS SEND
-  // This uses your real page link: https://www.facebook.com/share/1DafXC21Ct/
+  // Opens Messenger with message READY - just click SEND
   window.open(`https://m.me/61582648841656?text=${fullMessage}`, '_blank');
-  
-  // 4. ALSO OPEN PAGE FOR BACKUP
+
   setTimeout(()=>{
     document.getElementById('trackInput').value = d;
     switchTab('tracking');
     startLiveTrack();
-    alert('✅ Booking details auto-filled in Messenger! Just click SEND - no need to re-type.');
   }, 800);
 }
-
+setTimeout(startLiveTrack, 1500);
+</script>
+</body>
+                                                                                                                                    </html>
