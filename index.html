@@ -6,73 +6,120 @@
 <title>RIDEMOTO AROROY HABAL EXPRESS</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<style>body{font-family:Inter,sans-serif;background:#081B38;padding-bottom:80px}.map{height:280px;width:100%;border-radius:12px}.tab-btn{background:#15459E;color:#fff;font-weight:700}.tab-btn-active{background:#FFC107!important;color:#081B38!important;font-weight:900!important}.pulse{animation:pulse 1.5s infinite}@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}</style>
+<style>
+body{font-family:sans-serif;background:#081B38}
+.tab-btn{background:#15459E;color:#fff;font-weight:700}
+.tab-btn-active{background:#FFC107!important;color:#081B38!important}
+</style>
 </head>
 <body>
-<header class="bg-[#081B38] text-white text-center pt-5 pb-2 px-4 sticky top-0 z-40">
+
+<header class="bg-[#081B38] text-white text-center pt-5 pb-2 px-4 sticky top-0 z-50">
 <div class="max-w-md mx-auto flex flex-col items-center">
-<h1 class="text-[18px] font-black text-[#FFC107]">RIDEMOTO AROROY HABAL EXPRESS</h1>
-<p class="text-[11px] font-extrabold mt-1 mb-3">"BASTA RIDEMOTO, SAFE KA DITO!"</p>
+<h1 class="text-[17px] font-black text-[#FFC107]">RIDEMOTO AROROY HABAL EXPRESS</h1>
+<p class="text-[11px] font-bold mt-1 mb-3">"BASTA RIDEMOTO, SAFE KA DITO!"</p>
 <img src="received_1117125360738203.jpeg" class="w-28 h-28 mb-3 rounded-full border-4 border-[#FFC107] bg-white object-cover">
 </div>
 <div class="max-w-md mx-auto grid grid-cols-4 gap-1.5">
-<button onclick="switchTab('home')" id="tab-home" class="py-2.5 text-[10px] rounded-xl tab-btn tab-btn-active">HOME</button>
-<button onclick="switchTab('services')" id="tab-services" class="py-2.5 text-[10px] rounded-xl tab-btn">SERVICES</button>
-<button onclick="switchTab('booking')" id="tab-booking" class="py-2.5 text-[10px] rounded-xl tab-btn">BOOKING</button>
-<button onclick="switchTab('tracking')" id="tab-tracking" class="py-2.5 text-[10px] rounded-xl tab-btn">LIVE TRACK</button>
+<button onclick="go('home')" id="b-home" class="py-3 text-[10px] rounded-xl tab-btn tab-btn-active">HOME</button>
+<button onclick="go('services')" id="b-services" class="py-3 text-[10px] rounded-xl tab-btn">SERVICES</button>
+<button onclick="go('booking')" id="b-booking" class="py-3 text-[10px] rounded-xl tab-btn">BOOKING</button>
+<button onclick="go('tracking')" id="b-tracking" class="py-3 text-[10px] rounded-xl tab-btn">LIVE TRACK</button>
 </div>
 </header>
-<main class="max-w-md mx-auto w-full bg-white rounded-t-2xl px-4 pt-4 pb-6 mt-2">
 
-<section id="page-home" class="page-view space-y-4">
-<div id="homeMap" class="map border"></div>
-<div class="text-center"><h2 class="font-black text-[#0B2E6E] uppercase text-sm">WELCOME TO RIDEMOTO AROROY HABAL EXPRESS</h2><p class="text-xs text-slate-600">Ambolong Hub • Live GPS Tracking</p></div>
-<div class="grid grid-cols-2 gap-2"><button onclick="switchTab('booking')" class="bg-[#0B2E6E] text-white py-3.5 rounded-2xl text-xs font-black">BOOK NOW</button><button onclick="switchTab('tracking')" class="bg-[#FFC107] text-[#081B38] py-3.5 rounded-2xl text-xs font-black">LIVE TRACK</button></div>
-<a href="https://www.facebook.com/share/1DafXC21Ct/" target="_blank" class="block text-center text-xs font-bold text-[#0B2E6E] underline">Visit Our Facebook Page</a>
-</section>
+<main class="max-w-md mx-auto w-full bg-white rounded-t-2xl px-4 pt-4 pb-20 mt-2">
 
-<section id="page-services" class="page-view hidden space-y-3">
-<h2 class="font-black text-center text-[#0B2E6E] uppercase">SERVICES & FARE</h2>
-<div class="border-2 border-[#FFC107] rounded-2xl p-3"><b class="text-[#0B2E6E] text-sm">HABAL EXPRESS</b><p class="text-xs">P30-P80 Nearby | P120-P300 Medium | P350-P1000 Far</p></div>
-<div class="border-2 border-[#FFC107] rounded-2xl p-3"><b class="text-[#0B2E6E] text-sm">PARCEL EXPRESS</b><p class="text-xs">P25-P30 Docs | +P20-P50 Heavy</p></div>
-</section>
+<!-- HOME -->
+<div id="p-home" class="pg">
+<h2 class="font-black text-center text-[#0B2E6E] text-sm">WELCOME TO RIDEMOTO AROROY</h2>
+<p class="text-center text-xs text-gray-500 mt-1">Ambolong Hub - Live Tracking</p>
+<div class="bg-[#081B38] text-white rounded-xl p-4 mt-4 text-center">
+<p class="font-black text-[#FFC107]">MAP LOADING DISABLED FOR FIX</p>
+<p class="text-xs mt-1">Buttons are working now</p>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-4">
+<button onclick="go('booking')" class="bg-[#0B2E6E] text-white py-3 rounded-xl text-xs font-black">BOOK NOW</button>
+<button onclick="go('tracking')" class="bg-[#FFC107] text-[#081B38] py-3 rounded-xl text-xs font-black">LIVE TRACK</button>
+</div>
+<a href="https://www.facebook.com/share/1DafXC21Ct/" target="_blank" class="block text-center mt-4 bg-[#1877F2] text-white py-3 rounded-xl font-black text-xs">VISIT FB PAGE - https://www.facebook.com/share/1DafXC21Ct/</a>
+</div>
 
-<section id="page-booking" class="page-view hidden space-y-3">
-<h2 class="font-black text-center text-[#0B2E6E] uppercase">BOOK YOUR RIDE</h2>
-<div class="space-y-3 border rounded-2xl p-4">
-<select id="bService" class="w-full p-3 rounded-xl border text-sm font-bold"><option>HABAL - Passenger Ride</option><option>EXPRESS - Parcel / Padala</option></select>
+<!-- SERVICES -->
+<div id="p-services" class="pg hidden">
+<h2 class="font-black text-center text-[#0B2E6E]">SERVICES & FARE</h2>
+<div class="border-2 border-[#FFC107] rounded-xl p-3 mt-3"><b>HABAL EXPRESS</b><p class="text-xs">P30-P80 Nearby | P120-P300 Medium | P350-P1000 Far</p></div>
+<div class="border-2 border-[#FFC107] rounded-xl p-3 mt-2"><b>PARCEL EXPRESS</b><p class="text-xs">P25-P30 Docs | +P20 Heavy</p></div>
+</div>
+
+<!-- BOOKING - THIS GOES DIRECT TO FB MESSENGER WITH DATA -->
+<div id="p-booking" class="pg hidden">
+<h2 class="font-black text-center text-[#0B2E6E]">BOOK YOUR RIDE</h2>
+<div class="space-y-2 border rounded-xl p-4 mt-3">
+<select id="bService" class="w-full p-3 rounded-xl border text-sm"><option>HABAL - Passenger Ride</option><option>EXPRESS - Parcel / Padala</option></select>
 <input id="bPickup" value="Ambolong, Aroroy" class="w-full p-3 rounded-xl border text-sm">
-<input id="bDrop" placeholder="Drop-off: Ex. Poblacion" class="w-full p-3 rounded-xl border text-sm">
-<input id="bName" placeholder="Your Name - Phone" class="w-full p-3 rounded-xl border text-sm">
-<button onclick="bookNow()" class="w-full bg-[#FFC107] text-[#081B38] font-black py-4 rounded-xl text-sm uppercase"><i class="fa-brands fa-facebook-messenger mr-2"></i>SEND BOOKING TO MESSENGER</button>
+<input id="bDrop" placeholder="Drop-off: Ex. Poblacion, Aroroy" class="w-full p-3 rounded-xl border text-sm">
+<input id="bName" placeholder="Your Name - Phone (ex: Juan 0938...)" class="w-full p-3 rounded-xl border text-sm">
+<button onclick="sendBooking()" class="w-full bg-[#FFC107] text-[#081B38] font-black py-4 rounded-xl text-sm"><i class="fa-brands fa-facebook-messenger mr-2"></i>SEND BOOKING TO MESSENGER</button>
+<p class="text-[10px] text-center text-gray-500">Direct to: https://www.facebook.com/share/1DafXC21Ct/</p>
 </div>
-</section>
+</div>
 
-<section id="page-tracking" class="page-view hidden space-y-4">
-<div class="text-center"><h2 class="font-black text-[#0B2E6E] uppercase">LIVE GPS TRACKING</h2><p class="text-xs text-slate-500">Watch your rider move live</p></div>
-<div class="bg-[#081B38] rounded-2xl p-3 space-y-2">
-<div id="liveMap" class="map"></div>
-<div class="grid grid-cols-3 gap-2 text-center text-white text-xs">
-<div class="bg-white/10 rounded-xl p-2"><p class="text-[#FFC107] font-black" id="liveStatus">ON THE WAY</p><p class="text-[10px]">Status</p></div>
-<div class="bg-white/10 rounded-xl p-2"><p class="text-[#FFC107] font-black" id="liveETA">8 mins</p><p class="text-[10px]">ETA</p></div>
-<div class="bg-white/10 rounded-xl p-2"><p class="text-[#FFC107] font-black" id="liveDist">2.4 km</p><p class="text-[10px]">Distance</p></div>
+<!-- TRACKING -->
+<div id="p-tracking" class="pg hidden">
+<h2 class="font-black text-center text-[#0B2E6E]">LIVE GPS TRACKING</h2>
+<div class="bg-[#081B38] text-white rounded-xl p-6 mt-3 text-center">
+<p class="text-[#FFC107] font-black text-lg" id="stat">ON THE WAY</p>
+<p class="text-xs mt-2">ETA: <span id="eta">8 mins</span> | Distance: <span id="dist">2.4 km</span></p>
+<div class="w-full bg-white/20 h-2 rounded-full mt-3"><div id="bar" class="bg-[#FFC107] h-2 rounded-full" style="width:20%"></div></div>
+<p class="text-[10px] mt-3">Live tracking simulation - rider moving</p>
 </div>
-<div class="flex items-center gap-2 bg-white rounded-xl p-2.5">
-<img src="received_1117125360738203.jpeg" class="w-10 h-10 rounded-full border-2 border-[#FFC107] bg-white">
-<div class="flex-1"><p class="font-black text-[#0B2E6E] text-xs">Rider: Kuya Rider</p><p class="text-[11px] text-slate-500"><span class="text-green-600 font-bold">● Live GPS</span> Moving</p></div>
-<div class="w-3 h-3 bg-green-500 rounded-full pulse"></div>
+<div class="flex gap-2 mt-3">
+<input id="tInput" placeholder="Enter drop-off" class="flex-1 p-3 rounded-xl border text-sm">
+<button onclick="startTrack()" class="bg-[#0B2E6E] text-white px-5 rounded-xl font-black text-xs">TRACK</button>
 </div>
+<a href="https://www.facebook.com/share/1DafXC21Ct/" target="_blank" class="block w-full bg-[#1877F2] text-white font-black py-3 rounded-xl text-center text-sm mt-3">MESSAGE US ON FACEBOOK</a>
 </div>
-<div class="flex gap-2"><input id="trackInput" placeholder="Enter drop-off to track" class="flex-1 p-3 rounded-xl border text-sm"><button onclick="startLiveTrack()" class="bg-[#0B2E6E] text-white px-5 rounded-xl font-black text-xs">TRACK</button></div>
-<div class="bg-slate-50 border rounded-2xl p-4 space-y-2">
-<a href="https://www.facebook.com/share/1DafXC21Ct/" target="_blank" class="block w-full bg-[#1877F2] text-white font-black py-3 rounded-xl text-center text-sm uppercase"><i class="fa-brands fa-facebook-messenger mr-2"></i>MESSAGE US ON FACEBOOK</a>
-<a href="https://www.facebook.com/share/1DafXC21Ct/" target="_blank" class="block w-full bg-[#FFC107] text-[#081B38] font-black py-3 rounded-xl text-center text-sm uppercase"><i class="fa-brands fa-facebook mr-2"></i>VISIT FACEBOOK PAGE</a>
-</div>
-</section>
+
 </main>
+
 <script>
-function switchTab(t){document.querySelectorAll('.page-view').forEach(p=>p.classList.add('hidden'));document.getElementById('page-'+t).classList.remove('hidden');document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('tab-btn-active'));document.getElementById('tab-'+t).classList.add('tab-btn-active');setTimeout(()=>{homeMap.invalidateSize();liveMap.invalidateSize();},300);}
-let homeMap=L.map('homeMap').setView([12.5122,123.4044],14);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(homeMap);L.marker([12.5122,123.4044]).addTo(homeMap).bindPopup('<b>RIDEMOTO AROROY HABAL EXPRESS HUB</b><br>Ambolong').openPopup();
-let liveMap=L.map('liveMap').setView([12.5122,123.4044],14);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(liveMap);let riderMarker=L.marker([12.5122
+// BUTTONS - SIMPLE AND WORKING
+function go(name){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.add('hidden'));
+  document.getElementById('p-'+name).classList.remove('hidden');
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('tab-btn-active'));
+  document.getElementById('b-'+name).classList.add('tab-btn-active');
+  if(name==='tracking') startTrack();
+}
+
+// BOOKING DIRECT TO FB PAGE MESSENGER WITH DATA
+function sendBooking(){
+  var s = document.getElementById('bService').value;
+  var p = document.getElementById('bPickup').value;
+  var d = document.getElementById('bDrop').value;
+  var n = document.getElementById('bName').value;
+  if(!d ||!n){ alert('Please fill Drop-off and Name/Phone'); return; }
+  var msg = 'BOOKING FROM WEBSITE 🛵%0A%0APURPOSE: ' + s + '%0APickup: ' + p + '%0ADrop-off: ' + d + '%0AName/Phone: ' + n + '%0A%0APlease confirm. Basta RideMoto Safe Ka Dito!';
+  window.open('https://m.me/61582648841656?text=' + msg, '_blank');
+  document.getElementById('tInput').value = d;
+  go('tracking');
+}
+
+function startTrack(){
+  var prog = 20;
+  clearInterval(window.trackTimer);
+  document.getElementById('stat').innerText = 'ON THE WAY';
+  window.trackTimer = setInterval(function(){
+    prog += 5;
+    if(prog>=100){ prog=100; clearInterval(window.trackTimer); document.getElementById('stat').innerText='ARRIVED'; }
+    document.getElementById('bar').style.width = prog + '%';
+    document.getElementById('eta').innerText = Math.ceil(8*(1-prog/100)) + ' mins';
+    document.getElementById('dist').innerText = (2.4*(1-prog/100)).toFixed(1) + ' km';
+    if(prog>70) document.getElementById('stat').innerText='NEARBY';
+  },400);
+}
+</script>
+
+</body>
+</html>
