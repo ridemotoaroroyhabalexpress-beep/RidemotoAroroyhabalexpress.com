@@ -99,30 +99,30 @@ function go(name){
 }
 
 function sendBooking(){
-  var s=document.getElementById('bService').value;
-  var p=document.getElementById('bPickup').value;
-  var d=document.getElementById('bDrop').value;
-  var n=document.getElementById('bName').value;
+  var s=document.getElementById('bSer').value;
+  var p=document.getElementById('bPic').value;
+  var d=document.getElementById('bDro').value;
+  var n=document.getElementById('bNam').value;
   if(!d||!n){alert('Paki-fill po ang Drop-off at Name/Phone 😊');return;}
   
   var msg='BOOKING - RideMoto Aroroy Habal-Express 🛵\nSERVICE: '+s+'\nPickup: '+p+'\nDrop-off: '+d+'\nName/Phone: '+n+'\n\nPlease confirm po! Salamat!';
   
   navigator.clipboard.writeText(msg).catch(function(){});
 
-  var go = confirm("Salamat sa pag-book sa RideMoto Aroroy Habal-Express! 🛵\n\nNa-copy na po ang booking ninyo.\n\nGusto nyo na po ba i-send para ma-notify kami sa TEXT at Messenger?\n\nOK = Opo, i-send na\nCancel = Mamaya na lang");
+  var go2 = confirm("Salamat sa pag-book sa RideMoto Aroroy Habal-Express! 🛵\n\nNa-copy na po ang booking ninyo.\n\nI-tap OK para i-send sa TEXT (09385702290) para ma-notify kami.\n\nSalamat po!");
 
-  if(go){
+  if(go2){
     var REAL_NUMBER = "09385702290";
-    var smsLink = "sms:"+REAL_NUMBER+"?body="+encodeURIComponent(msg);
-    var fbLink = "https://m.me/1297377406797691";
-
-    window.open(smsLink, "_blank");
-    
+    window.location.href = "sms:"+REAL_NUMBER+"?body="+encodeURIComponent(msg);
     setTimeout(function(){
-      if(confirm("Na-send na po ba sa TEXT sa 09385702290? I-send din po natin sa FB Page Messenger para sure ma-notify kami?\n\nOK = Yes, open Messenger")){
-        window.open(fbLink, "_blank");
+      if(confirm("Na-send na po sa TEXT? Gusto nyo din i-send sa Messenger para sure? 😊")){
+        window.open("https://m.me/1297377406797691", "_blank");
       }
-    },1200);
+    },1000);
+  } else {
+    alert("Okay po! Na-save na. Pwede nyo i-paste sa TEXT (09385702290) o sa RideMoto Messenger. Salamat! 😊🛵");
+  }
+}
 
   } else {
     alert("Okay po! Na-save na. Pwede nyo i-paste anytime sa TEXT (09385702290) o sa RideMoto Messenger. Salamat! 😊🛵");
