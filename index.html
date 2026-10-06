@@ -107,19 +107,9 @@ function sendBooking(){
   var n=document.getElementById('bNam').value;
   if(!d||!n){alert('Paki-fill po ang Drop-off at Name/Phone 😊');return;}
   var msg='BOOKING - RideMoto Aroroy Habal-Express 🛵\nSERVICE: '+s+'\nPickup: '+p+'\nDrop-off: '+d+'\nName/Phone: '+n+'\n\nPlease confirm po! Salamat!';
-  navigator.clipboard.writeText(msg).catch(function(){});
-  var go2 = confirm("Salamat sa pag-book sa RideMoto Aroroy Habal-Express! 🛵\n\nNa-copy na po ang booking ninyo.\n\nI-tap OK para i-send sa TEXT (09385702290) para ma-notify kami.\n\nSalamat po!");
-  if(go2){
-    var REAL_NUMBER = "09385702290";
-    window.location.href = "sms:"+REAL_NUMBER+"?body="+encodeURIComponent(msg);
-    setTimeout(function(){
-      if(confirm("Na-send na po sa TEXT? Gusto nyo din i-send sa Messenger para sure? 😊")){
-        window.open("https://m.me/1297377406797691", "_blank");
-      }
-    },1000);
-  } else {
-    alert("Okay po! Na-save na. Pwede nyo i-paste anytime sa TEXT (09385702290) o sa RideMoto Messenger. Salamat! 😊🛵");
-  }
+  try{navigator.clipboard.writeText(msg);}catch(e){}
+  alert("Salamat po! Na-copy na ang booking.\n\nI-o-open ko na ang Messenger nyo, i-PASTE nyo lang po doon. Salamat! 🛵");
+  window.location.href = "https://m.me/1297377406797691";
 }
 
 // MAPS SECOND - SAFE, WON'T CRASH BUTTONS
