@@ -105,8 +105,8 @@ function sendBooking(){
   var n=document.getElementById('bName').value;
   if(!d||!n){alert('Please fill Drop-off and Name');return;}
   var msg='BOOKING FROM WEBSITE\n\nPURPOSE: '+s+'\nPickup: '+p+'\nDrop-off: '+d+'\nName/Phone: '+n+'\n\nFrom: RideMoto Website';
-  navigator.clipboard.writeText(msg).then(function(){
-    alert('Booking details COPIED! I will open Messenger — just PASTE (long press) and SEND!');
+    navigator.clipboard.writeText(msg).then(function(){
+    alert('Booking details COPIED! I will open Messenger - just PASTE and SEND!');
   });
   window.open('https://m.me/1297377406797691','_blank');
   document.getElementById('tInput').value=d;
