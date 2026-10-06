@@ -159,15 +159,32 @@ function shareLocation(){
   }
 }
 function bookNow(){
-  const s=document.getElementById('bService').value, p=document.getElementById('bPickup').value, d=document.getElementById('bDrop').value, n=document.getElementById('bName').value;
-  if(!d||!n){ alert('Fill drop-off and name'); return; }
-  const msg=`Hello RIDEMOTO AROROY HABAL EXPRESS!%0A%0A🛵 BOOKING:%0AService:${s}%0AFrom:${p}%0ATo:${d}%0AName/Phone:${n}%0A%0ATrack here: https://your-site.github.io`;
-  window.open(`https://www.facebook.com/share/1DafXC21Ct/`, '_blank');
-  setTimeout(()=>window.open(`https://m.me/61582648841656?text=${msg}`, '_blank'), 600);
-  setTimeout(()=>{ document.getElementById('trackInput').value=d; switchTab('tracking'); startLiveTrack(); }, 1000);
+  const s = document.getElementById('bService').value;
+  const p = document.getElementById('bPickup').value;
+  const d = document.getElementById('bDrop').value;
+  const n = document.getElementById('bName').value;
+  
+  if(!d || !n){ 
+    alert('Please fill Drop-off and Name/Phone'); 
+    return; 
+  }
+
+  // 1. AUTO SAVE TO GOOGLE SHEET (optional - create sheet if you want)
+  // You can add your Web App URL here later
+  
+  // 2. AUTO-FILL FACEBOOK MESSAGE - NO RE-TYPE NEEDED
+  const fullMessage = `Hello RIDEMOTO AROROY HABAL EXPRESS! 🛵%0A%0A📝 NEW BOOKING:%0A━━━━━━━━━━━━━━━%0AService: ${s}%0APickup: ${p}%0ADrop-off: ${d}%0AName/Phone: ${n}%0A%0ABooking from website: https://your-site.github.io%0A━━━━━━━━━━━━━━━%0ABasta RideMoto, Safe Ka Dito!`;
+
+  // 3. OPEN YOUR FACEBOOK PAGE WITH MESSAGE READY - CUSTOMER JUST CLICKS SEND
+  // This uses your real page link: https://www.facebook.com/share/1DafXC21Ct/
+  window.open(`https://m.me/61582648841656?text=${fullMessage}`, '_blank');
+  
+  // 4. ALSO OPEN PAGE FOR BACKUP
+  setTimeout(()=>{
+    document.getElementById('trackInput').value = d;
+    switchTab('tracking');
+    startLiveTrack();
+    alert('✅ Booking details auto-filled in Messenger! Just click SEND - no need to re-type.');
+  }, 800);
 }
-// Auto start demo
-setTimeout(startLiveTrack, 1500);
-</script>
-</body>
-  </html>
+
