@@ -85,15 +85,17 @@ body{font-family:sans-serif;background:#081B38}
 <script>
 // BUTTONS FIRST - ALWAYS WORK
 function go(name){
-  document.querySelectorAll('.pg').forEach(p=>p.classList.add('hidden'));
-  document.getElementById('p-'+name).classList.remove('hidden');
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('tab-btn-active'));
-  document.getElementById('b-'+name).classList.add('tab-btn-active');
+  document.querySelectorAll('.pg').forEach(function(el){ el.style.display='none'; });
+  var target = document.getElementById('p-'+name);
+  if(target) target.style.display='block';
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  var btn = document.getElementById('b-'+name);
+  if(btn) btn.classList.add('active');
   setTimeout(function(){
     try{
       if(window.map1) map1.invalidateSize();
       if(window.map2) map2.invalidateSize();
-      if(name==='tracking') startTrack();
+      if(name==='tracking') startTracking();
     }catch(e){}
   },300);
 }
