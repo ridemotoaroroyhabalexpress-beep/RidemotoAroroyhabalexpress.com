@@ -40,13 +40,11 @@ body{font-family:sans-serif;background:#081B38}
 </div>
 <a href="https://m.me/1297377406797691" target="_blank" class="block text-center mt-4 bg-[#1877F2] text-white py-3.5 rounded-xl font-black text-xs">VISIT FB PAGE</a>
 </div>
-
 <div id="p-services" class="pg hidden">
 <h2 class="font-black text-center text-[#0B2E6E]">SERVICES & FARE</h2>
 <div class="border-2 border-[#FFC107] rounded-xl p-3 mt-3"><b>HABAL EXPRESS</b><p class="text-xs">P30-P80 Nearby | P120-P300 Medium | P350-P1000 Far</p></div>
 <div class="border-2 border-[#FFC107] rounded-xl p-3 mt-2"><b>PARCEL EXPRESS</b><p class="text-xs">P25-P30 Docs | +P20 Heavy</p></div>
 </div>
-
 <div id="p-booking" class="pg hidden">
 <div class="space-y-2 border rounded-xl p-4 mt-3">
 <select id="bService" class="w-full p-3 rounded-xl border text-sm"><option>HABAL - Passenger Ride</option><option>EXPRESS - Parcel / Padala</option></select>
@@ -57,7 +55,6 @@ body{font-family:sans-serif;background:#081B38}
 <p class="text-[10px] text-center text-gray-500 mt-2">Works offline - will send when internet returns<br>To: Messenger ID 1297377406797691</p>
 </div>
 </div>
-
 <div id="p-tracking" class="pg hidden">
 <h2 class="font-black text-center text-[#0B2E6E]">LIVE GPS TRACKING</h2>
 <div id="map2" class="map border mt-3"><span class="text-xs text-slate-500">Loading Live Tracking...</span></div>
@@ -72,16 +69,13 @@ body{font-family:sans-serif;background:#081B38}
 </div>
 <a href="https://www.facebook.com/1297377406797691" target="_blank" class="block w-full bg-[#1877F2] text-white font-black py-3 rounded-xl text-center text-sm mt-3">MESSAGE US ON FACEBOOK</a>
 </div>
-
 <div style="background:black;color:#ffcc00;padding:12px;text-align:center;font-weight:bold;font-size:14px;margin-top:15px;">📍 Main Hub: Ambolong Zone 2, Aroroy, Masbate | 📞 BOOKING: 0938-570-2290 (TNT) - Dispatch Only</div>
 <div style="display:flex;gap:8px;padding:10px;background:white;justify-content:center;border-bottom:1px solid #eee;">
 <a href="tel:09385702290" style="flex:1;max-width:180px;background:#28a745;color:white;padding:12px;text-align:center;border-radius:8px;text-decoration:none;font-weight:bold;">📞 CALL NOW</a>
 <a href="sms:09385702290" style="flex:1;max-width:180px;background:#007bff;color:white;padding:12px;text-align:center;border-radius:8px;text-decoration:none;font-weight:bold;">💬 TEXT BOOK</a>
 </div>
 </main>
-
 <script>
-// FIXED BUTTONS - WORKING
 function go(name){
   document.querySelectorAll('.pg').forEach(function(el){ el.style.display='none'; });
   var target = document.getElementById('p-'+name);
@@ -91,19 +85,21 @@ function go(name){
   if(btn) btn.classList.add('tab-btn-active');
   setTimeout(function(){ try{ if(window.map1) map1.invalidateSize(); if(window.map2) map2.invalidateSize(); }catch(e){} },300);
 }
-
-// FIXED SEND BOOKING - NO CRASH, LIGHT VERSION
 function sendBooking(){
   var s = document.getElementById('bService').value;
   var p = document.getElementById('bPickup').value;
   var d = document.getElementById('bDrop').value;
   var n = document.getElementById('bName').value;
   if(!d ||!n){ alert('Paki-fill po ang Drop-off at Name/Phone 😊'); return; }
-  var msg = 'BOOKING - RideMoto Aroroy 🛵\nSERVICE: '+s+'\nPickup: '+p+'\nDrop-off: '+d+'\nName/Phone: '+n;
+  var msg = 'Hello po! RideMoto Aroroy Booking po 🛵\n\n'
+          + 'Name/Phone: ' + n + '\n'
+          + 'Service: ' + s + '\n'
+          + 'Pickup: ' + p + '\n'
+          + 'Drop-off: ' + d + '\n\n'
+          + 'Pa-confirm po if tama, and pa-send po ng exact landmark? Salamat po! 🙏';
   var url = 'https://m.me/1297377406797691?text=' + encodeURIComponent(msg);
   window.open(url, '_blank');
 }
-
 var map1, map2, rider, dest, line, timer;
 function initMapsSafe(){
   try{
