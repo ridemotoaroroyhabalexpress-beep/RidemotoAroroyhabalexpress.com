@@ -52,7 +52,14 @@ body{font-family:sans-serif;background:#081B38}
 <input id="bDrop" placeholder="Drop-off: Ex. Poblacion" class="w-full p-3 rounded-xl border text-sm">
 <input id="bName" placeholder="Your Name - Phone" class="w-full p-3 rounded-xl border text-sm">
 <button onclick="sendBooking()" class="w-full bg-[#FFC107] text-[#081B38] font-black py-4 rounded-xl text-sm"><i class="fa-brands fa-facebook-messenger mr-2"></i>SEND BOOKING TO MESSENGER</button>
-<p class="text-[10px] text-center text-gray-500 mt-2">Works offline - will send when internet returns<br>To: Messenger ID 1297377406797691</p>
+<div class="text-[10px] text-center text-gray-600 mt-3 bg-yellow-50 p-3 rounded-lg border">
+<p class="font-bold text-[#081B38] text-[11px]">📱 PAANO MAG-BOOK:</p>
+<p class="mt-1">1. I-click SEND BOOKING button sa taas</p>
+<p>2. Sa Messenger, i-tap ang SEND button (blue arrow ➤)</p>
+<p>3. Mag-wait lang po sa reply namin sa Messenger</p>
+<p class="mt-2 font-bold text-[#0B2E6E]">Customer will send, you will be notified both FB & Phone! ✅</p>
+<p class="mt-1 text-[9px]">To: Messenger ID 1297377406797691 | Works offline</p>
+</div>
 </div>
 </div>
 <div id="p-tracking" class="pg hidden">
@@ -96,51 +103,10 @@ function sendBooking(){
           + 'Service: ' + s + '\n'
           + 'Pickup: ' + p + '\n'
           + 'Drop-off: ' + d + '\n\n'
-          + 'Pa-confirm po if tama, and pa-send po ng exact landmark? Salamat po! 🙏';
+          + 'Pa-confirm po if tama? Mag-wait lang po ako sa reply. Salamat po! 🙏';
+  alert('Salamat po! I-o-open ko na ang Messenger ninyo.\n\n✅ STEP 1: I-tap ang SEND (blue arrow) sa Messenger\n✅ STEP 2: Mag-wait lang po sa reply namin\n\nSalamat po! 🛵');
   var url = 'https://m.me/1297377406797691?text=' + encodeURIComponent(msg);
   window.open(url, '_blank');
 }
 var map1, map2, rider, dest, line, timer;
-function initMapsSafe(){
-  try{
-    if(typeof L === 'undefined') throw 'offline';
-    if(!map1){
-      map1 = L.map('map1').setView([12.5122,123.4044],14);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18}).addTo(map1);
-      L.marker([12.5122,123.4044]).addTo(map1).bindPopup('<b>RIDEMOTO HUB</b><br>Ambolong').openPopup();
-    }
-    if(!map2){
-      map2 = L.map('map2').setView([12.5122,123.4044],14);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18}).addTo(map2);
-      rider = L.marker([12.5122,123.4044],{icon:L.divIcon({html:'<div style="background:#FFC107;border:3px solid #081B38;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center">🛵</div>',className:''})}).addTo(map2);
-      dest = L.marker([12.517,123.410]).addTo(map2);
-      line = L.polyline([[12.5122,123.4044],[12.517,123.410]],{color:'#FFC107',weight:5,dashArray:'8,8'}).addTo(map2);
-    }
-  }catch(err){
-    document.getElementById('map1').innerHTML='<div class="text-center p-4"><p class="font-black text-[#0B2E6E] text-xs">📴 OFFLINE</p><p class="text-[11px]">Booking works!</p></div>';
-  }
-}
-function startTrack(){
-  try{
-    if(!map2 ||!rider) return;
-    var d=document.getElementById('tInput').value||'Poblacion';
-    var dLat=12.5122+(Math.random()*0.02-0.01); var dLng=123.4044+(Math.random()*0.02-0.01);
-    dest.setLatLng([dLat,dLng]).bindPopup(d).openPopup();
-    line.setLatLngs([[12.5122,123.4044],[dLat,dLng]]);
-    map2.fitBounds(line.getBounds(),{padding:[20,20]});
-    var prog=0; clearInterval(timer);
-    document.getElementById('stat').innerText='ON THE WAY';
-    timer=setInterval(function(){
-      prog+=0.03; if(prog>=1){clearInterval(timer);document.getElementById('stat').innerText='ARRIVED';document.getElementById('eta').innerText='0 min';document.getElementById('dist').innerText='0 km';return;}
-      var lat=12.5122+(dLat-12.5122)*prog; var lng=123.4044+(dLng-123.4044)*prog;
-      rider.setLatLng([lat,lng]);
-      document.getElementById('eta').innerText=Math.ceil(8*(1-prog))+' mins';
-      document.getElementById('dist').innerText=(2.4*(1-prog)).toFixed(1)+' km';
-      if(prog>0.7) document.getElementById('stat').innerText='NEARBY';
-    },400);
-  }catch(e){}
-}
-window.addEventListener('load', function(){ setTimeout(initMapsSafe, 800); });
-</script>
-</body>
-</html>
+function
