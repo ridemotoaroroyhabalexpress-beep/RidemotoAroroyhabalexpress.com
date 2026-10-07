@@ -29,9 +29,7 @@ body{font-family:sans-serif;background:#081B38}
 <button onclick="go('tracking')" id="b-tracking" class="py-3 text-[10px] rounded-xl tab-btn">LIVE TRACK</button>
 </div>
 </header>
-
 <main class="max-w-md mx-auto w-full bg-white rounded-t-2xl px-4 pt-4 pb-20 mt-2">
-
 <div id="p-home" class="pg">
 <div id="map1" class="map border"><span class="text-xs text-slate-500">Loading Aroroy Map...</span></div>
 <h2 class="font-black text-center text-[#0B2E6E] text-sm mt-4">WELCOME TO RIDEMOTO AROROY</h2>
@@ -50,7 +48,6 @@ body{font-family:sans-serif;background:#081B38}
 </div>
 
 <div id="p-booking" class="pg hidden">
-<a href="https://m.me/1297377406797691" target="_blank">Message us on Messenger</a>
 <div class="space-y-2 border rounded-xl p-4 mt-3">
 <select id="bService" class="w-full p-3 rounded-xl border text-sm"><option>HABAL - Passenger Ride</option><option>EXPRESS - Parcel / Padala</option></select>
 <input id="bPickup" value="Ambolong, Aroroy" class="w-full p-3 rounded-xl border text-sm">
@@ -75,6 +72,7 @@ body{font-family:sans-serif;background:#081B38}
 </div>
 <a href="https://www.facebook.com/1297377406797691" target="_blank" class="block w-full bg-[#1877F2] text-white font-black py-3 rounded-xl text-center text-sm mt-3">MESSAGE US ON FACEBOOK</a>
 </div>
+
 <div style="background:black;color:#ffcc00;padding:12px;text-align:center;font-weight:bold;font-size:14px;margin-top:15px;">📍 Main Hub: Ambolong Zone 2, Aroroy, Masbate | 📞 BOOKING: 0938-570-2290 (TNT) - Dispatch Only</div>
 <div style="display:flex;gap:8px;padding:10px;background:white;justify-content:center;border-bottom:1px solid #eee;">
 <a href="tel:09385702290" style="flex:1;max-width:180px;background:#28a745;color:white;padding:12px;text-align:center;border-radius:8px;text-decoration:none;font-weight:bold;">📞 CALL NOW</a>
@@ -83,47 +81,38 @@ body{font-family:sans-serif;background:#081B38}
 </main>
 
 <script>
-// BUTTONS FIRST - ALWAYS WORK
+// FIXED BUTTONS - WORKING
 function go(name){
   document.querySelectorAll('.pg').forEach(function(el){ el.style.display='none'; });
   var target = document.getElementById('p-'+name);
   if(target) target.style.display='block';
-  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('tab-btn-active'); });
   var btn = document.getElementById('b-'+name);
-  if(btn) btn.classList.add('active');
-  setTimeout(function(){
-    try{
-      if(window.map1) map1.invalidateSize();
-      if(window.map2) map2.invalidateSize();
-      if(name==='tracking') startTracking();
-    }catch(e){}
-  },300);
+  if(btn) btn.classList.add('tab-btn-active');
+  setTimeout(function(){ try{ if(window.map1) map1.invalidateSize(); if(window.map2) map2.invalidateSize(); }catch(e){} },300);
 }
 
+// FIXED SEND BOOKING - NO CRASH, LIGHT VERSION
 function sendBooking(){
-  var s=document.getElementById('bSer').value;
-  var p=document.getElementById('bPic').value;
-  var d=document.getElementById('bDro').value;
-  var n=document.getElementById('bNam').value;
-  if(!d||!n){alert('Paki-fill po ang Drop-off at Name/Phone 😊');return;}
-  var msg='BOOKING - RideMoto Aroroy Habal-Express 🛵\nSERVICE: '+s+'\nPickup: '+p+'\nDrop-off: '+d+'\nName/Phone: '+n+'\n\nPlease confirm po! Salamat!';
-  try{navigator.clipboard.writeText(msg);}catch(e){}
-  alert("Salamat po! Na-copy na ang booking.\n\nI-o-open ko na ang Messenger nyo, i-PASTE nyo lang po doon. Salamat! 🛵");
-  window.location.href = "https://m.me/1297377406797691";
+  var s = document.getElementById('bService').value;
+  var p = document.getElementById('bPickup').value;
+  var d = document.getElementById('bDrop').value;
+  var n = document.getElementById('bName').value;
+  if(!d ||!n){ alert('Paki-fill po ang Drop-off at Name/Phone 😊'); return; }
+  var msg = 'BOOKING - RideMoto Aroroy 🛵\nSERVICE: '+s+'\nPickup: '+p+'\nDrop-off: '+d+'\nName/Phone: '+n;
+  var url = 'https://m.me/1297377406797691?text=' + encodeURIComponent(msg);
+  window.open(url, '_blank');
 }
 
-// MAPS SECOND - SAFE, WON'T CRASH BUTTONS
 var map1, map2, rider, dest, line, timer;
 function initMapsSafe(){
   try{
-    if(typeof L === 'undefined') throw 'Leaflet not loaded - offline';
-    // HOME MAP
+    if(typeof L === 'undefined') throw 'offline';
     if(!map1){
       map1 = L.map('map1').setView([12.5122,123.4044],14);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18}).addTo(map1);
-      L.marker([12.5122,123.4044]).addTo(map1).bindPopup('<b>RIDEMOTO HUB</b><br>Ambolong, Aroroy').openPopup();
+      L.marker([12.5122,123.4044]).addTo(map1).bindPopup('<b>RIDEMOTO HUB</b><br>Ambolong').openPopup();
     }
-    // LIVE MAP
     if(!map2){
       map2 = L.map('map2').setView([12.5122,123.4044],14);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18}).addTo(map2);
@@ -132,27 +121,22 @@ function initMapsSafe(){
       line = L.polyline([[12.5122,123.4044],[12.517,123.410]],{color:'#FFC107',weight:5,dashArray:'8,8'}).addTo(map2);
     }
   }catch(err){
-    console.log('Offline mode:', err);
-    document.getElementById('map1').innerHTML='<div class="text-center p-4"><p class="font-black text-[#0B2E6E] text-xs">📴 OFFLINE MODE</p><p class="text-[11px] text-slate-500">Map needs internet, but BOOKING still works!</p><img src="received_1117125360738203.jpeg" class="w-16 h-16 mx-auto mt-2 rounded-full border-2 border-[#FFC107]"></div>';
-    document.getElementById('map2').innerHTML='<div class="text-center p-4"><p class="font-black text-[#0B2E6E] text-xs">📴 OFFLINE MODE</p><p class="text-[11px] text-slate-500">Live tracking needs internet</p></div>';
+    document.getElementById('map1').innerHTML='<div class="text-center p-4"><p class="font-black text-[#0B2E6E] text-xs">📴 OFFLINE</p><p class="text-[11px]">Booking works!</p></div>';
   }
 }
-
 function startTrack(){
   try{
     if(!map2 ||!rider) return;
     var d=document.getElementById('tInput').value||'Poblacion';
-    var dLat=12.5122+(Math.random()*0.02-0.01);
-    var dLng=123.4044+(Math.random()*0.02-0.01);
-    dest.setLatLng([dLat,dLng]).bindPopup('Drop-off: '+d).openPopup();
+    var dLat=12.5122+(Math.random()*0.02-0.01); var dLng=123.4044+(Math.random()*0.02-0.01);
+    dest.setLatLng([dLat,dLng]).bindPopup(d).openPopup();
     line.setLatLngs([[12.5122,123.4044],[dLat,dLng]]);
     map2.fitBounds(line.getBounds(),{padding:[20,20]});
     var prog=0; clearInterval(timer);
     document.getElementById('stat').innerText='ON THE WAY';
     timer=setInterval(function(){
       prog+=0.03; if(prog>=1){clearInterval(timer);document.getElementById('stat').innerText='ARRIVED';document.getElementById('eta').innerText='0 min';document.getElementById('dist').innerText='0 km';return;}
-      var lat=12.5122+(dLat-12.5122)*prog;
-      var lng=123.4044+(dLng-123.4044)*prog;
+      var lat=12.5122+(dLat-12.5122)*prog; var lng=123.4044+(dLng-123.4044)*prog;
       rider.setLatLng([lat,lng]);
       document.getElementById('eta').innerText=Math.ceil(8*(1-prog))+' mins';
       document.getElementById('dist').innerText=(2.4*(1-prog)).toFixed(1)+' km';
@@ -160,11 +144,7 @@ function startTrack(){
     },400);
   }catch(e){}
 }
-
-// Load maps AFTER buttons are ready
-window.addEventListener('load', function(){
-  setTimeout(initMapsSafe, 800);
-});
+window.addEventListener('load', function(){ setTimeout(initMapsSafe, 800); });
 </script>
 </body>
 </html>
