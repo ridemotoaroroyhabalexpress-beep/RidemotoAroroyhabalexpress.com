@@ -5,142 +5,105 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RIDEMOTO AROROY HABAL EXPRESS</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 body{font-family:sans-serif;background:#081B38}
-.tab-btn{background:#15459E;color:#fff;font-weight:700}
+.tab-btn{background:#15459E;color:#fff;font-weight:700;padding:12px;border-radius:12px;font-size:10px}
 .tab-btn-active{background:#FFC107!important;color:#081B38!important}
-.map{height:280px;width:100%;border-radius:16px;background:#e2e8f0;display:flex;align-items:center;justify-content:center}
+.pg{display:none}.pg-active{display:block!important}
 </style>
 </head>
 <body>
 <header class="bg-[#081B38] text-white text-center pt-5 pb-2 px-4 sticky top-0 z-50">
-<div class="max-w-md mx-auto flex flex-col items-center">
+<div class="max-w-md mx-auto">
 <h1 class="text-[17px] font-black text-[#FFC107]">RIDEMOTO AROROY HABAL EXPRESS</h1>
 <p class="text-[11px] font-bold mt-1 mb-3">"BASTA RIDEMOTO, SAFE KA DITO!"</p>
-<img src="received_1117125360738203.jpeg" class="w-28 h-28 mb-3 rounded-full border-4 border-[#FFC107] bg-white object-cover">
 </div>
 <div class="max-w-md mx-auto grid grid-cols-4 gap-1.5">
-<button onclick="go('home')" id="b-home" class="py-3 text-[10px] rounded-xl tab-btn tab-btn-active">HOME</button>
-<button onclick="go('services')" id="b-services" class="py-3 text-[10px] rounded-xl tab-btn">SERVICES</button>
-<button onclick="go('booking')" id="b-booking" class="py-3 text-[10px] rounded-xl tab-btn">BOOKING</button>
-<button onclick="go('tracking')" id="b-tracking" class="py-3 text-[10px] rounded-xl tab-btn">LIVE TRACK</button>
+<button onclick="go('home')" id="b-home" class="tab-btn tab-btn-active">HOME</button>
+<button onclick="go('services')" id="b-services" class="tab-btn">SERVICES</button>
+<button onclick="go('booking')" id="b-booking" class="tab-btn">BOOKING</button>
+<button onclick="go('tracking')" id="b-tracking" class="tab-btn">LIVE TRACK</button>
 </div>
 </header>
 <main class="max-w-md mx-auto w-full bg-white rounded-t-2xl px-4 pt-4 pb-20 mt-2">
-<div id="p-home" class="pg">
-<div id="map1" class="map border"><span class="text-xs text-slate-500">Loading Aroroy Map...</span></div>
+<div id="p-home" class="pg pg-active">
 <h2 class="font-black text-center text-[#0B2E6E] text-sm mt-4">WELCOME TO RIDEMOTO AROROY</h2>
-<p class="text-center text-xs text-gray-500">Ambolong Hub - Works even with weak internet</p>
 <div class="grid grid-cols-2 gap-2 mt-4">
 <button onclick="go('booking')" class="bg-[#0B2E6E] text-white py-3.5 rounded-xl text-xs font-black">BOOK NOW</button>
 <button onclick="go('tracking')" class="bg-[#FFC107] text-[#081B38] py-3.5 rounded-xl text-xs font-black">LIVE TRACK</button>
 </div>
 <a href="https://m.me/1297377406797691" target="_blank" class="block text-center mt-4 bg-[#1877F2] text-white py-3.5 rounded-xl font-black text-xs">VISIT FB PAGE</a>
 </div>
-<div id="p-services" class="pg hidden">
+<div id="p-services" class="pg">
 <h2 class="font-black text-center text-[#0B2E6E]">SERVICES & FARE</h2>
-<div class="border-2 border-[#FFC107] rounded-xl p-3 mt-3"><b>HABAL EXPRESS</b><p class="text-xs">P30-P80 Nearby | P120-P300 Medium | P350-P1000 Far</p></div>
-<div class="border-2 border-[#FFC107] rounded-xl p-3 mt-2"><b>PARCEL EXPRESS</b><p class="text-xs">P25-P30 Docs | +P20 Heavy</p></div>
+<div class="border-2 border-[#FFC107] rounded-xl p-3 mt-3"><b>HABAL EXPRESS</b><p class="text-xs">P30-P1000 depending on distance</p></div>
 </div>
-<div id="p-booking" class="pg hidden">
+<div id="p-booking" class="pg">
 <div class="space-y-2 border rounded-xl p-4 mt-3">
-<select id="bService" class="w-full p-3 rounded-xl border text-sm"><option>HABAL - Passenger Ride</option><option>EXPRESS - Parcel / Padala</option></select>
+<select id="bService" class="w-full p-3 rounded-xl border text-sm"><option>HABAL - Passenger Ride</option><option>EXPRESS - Parcel</option></select>
 <input id="bPickup" value="Ambolong, Aroroy" class="w-full p-3 rounded-xl border text-sm">
 <input id="bDrop" placeholder="Drop-off: Ex. Poblacion" class="w-full p-3 rounded-xl border text-sm">
 <input id="bName" placeholder="Your Name - Phone" class="w-full p-3 rounded-xl border text-sm">
-<button onclick="sendBooking()" class="w-full bg-[#FFC107] text-[#081B38] font-black py-4 rounded-xl text-sm"><i class="fa-brands fa-facebook-messenger mr-2"></i>SEND BOOKING TO MESSENGER</button>
-<p class="text-[10px] text-center text-gray-500 mt-2">Works offline - will send when internet returns<br>To: Messenger ID 1297377406797691</p>
+<button onclick="sendBooking()" class="w-full bg-[#FFC107] text-[#081B38] font-black py-4 rounded-xl text-sm">SEND BOOKING TO MESSENGER</button>
+<div class="text-[11px] text-left bg-yellow-50 p-3 rounded-lg border leading-5">
+<p class="font-black text-center">🙏 Maraming Salamat po!</p>
+<p class="mt-2">Hello po Ma'am/Sir! 😊</p>
+<p>1️⃣ Pakiclick po ng SEND BOOKING</p>
+<p>2️⃣ Auto-copy na po ang details</p>
+<p>3️⃣ Bubukas po ang Messenger</p>
+<p>4️⃣ Paki-PASTE lang po</p>
+<p>5️⃣ Paki-tap lang po ang SEND button (blue arrow ➤)</p>
+<p class="mt-3 font-bold text-[#0B2E6E] text-center">We will get back to you as soon as possible while we process your booking information. We'll be right back in a jiffy! 🛵💛</p>
 </div>
-</div>
-<div id="p-tracking" class="pg hidden">
-<h2 class="font-black text-center text-[#0B2E6E]">LIVE GPS TRACKING</h2>
-<div id="map2" class="map border mt-3"><span class="text-xs text-slate-500">Loading Live Tracking...</span></div>
-<div class="bg-[#081B38] text-white rounded-xl p-3 mt-3 grid grid-cols-3 gap-2 text-center text-xs">
-<div class="bg-white/10 rounded-xl p-2"><p class="text-[#FFC107] font-black" id="stat">ON THE WAY</p><p class="text-[9px]">Status</p></div>
-<div class="bg-white/10 rounded-xl p-2"><p class="text-[#FFC107] font-black" id="eta">8 mins</p><p class="text-[9px]">ETA</p></div>
-<div class="bg-white/10 rounded-xl p-2"><p class="text-[#FFC107] font-black" id="dist">2.4 km</p><p class="text-[9px]">Distance</p></div>
 </div>
 <div class="flex gap-2 mt-3">
-<input id="tInput" placeholder="Enter drop-off" class="flex-1 p-3 rounded-xl border text-sm">
-<button onclick="startTrack()" class="bg-[#0B2E6E] text-white px-5 rounded-xl font-black text-xs">TRACK</button>
+<a href="tel:09385702290" class="flex-1 bg-[#28a745] text-white py-3 rounded-xl text-center font-black text-xs">📞 CALL NOW</a>
+<a href="sms:09385702290" class="flex-1 bg-[#007bff] text-white py-3 rounded-xl text-center font-black text-xs">💬 TEXT BOOK</a>
 </div>
-<a href="https://www.facebook.com/1297377406797691" target="_blank" class="block w-full bg-[#1877F2] text-white font-black py-3 rounded-xl text-center text-sm mt-3">MESSAGE US ON FACEBOOK</a>
 </div>
-<div style="background:black;color:#ffcc00;padding:12px;text-align:center;font-weight:bold;font-size:14px;margin-top:15px;">📍 Main Hub: Ambolong Zone 2, Aroroy, Masbate | 📞 BOOKING: 0938-570-2290 (TNT) - Dispatch Only</div>
-<div style="display:flex;gap:8px;padding:10px;background:white;justify-content:center;border-bottom:1px solid #eee;">
-<a href="tel:09385702290" style="flex:1;max-width:180px;background:#28a745;color:white;padding:12px;text-align:center;border-radius:8px;text-decoration:none;font-weight:bold;">📞 CALL NOW</a>
-<a href="sms:09385702290" style="flex:1;max-width:180px;background:#007bff;color:white;padding:12px;text-align:center;border-radius:8px;text-decoration:none;font-weight:bold;">💬 TEXT BOOK</a>
+<div id="p-tracking" class="pg">
+<h2 class="font-black text-center text-[#0B2E6E]">LIVE TRACKING</h2>
+<div class="bg-[#081B38] text-white rounded-xl p-3 mt-3 grid grid-cols-3 gap-2 text-center text-xs">
+<div class="bg-white/10 rounded-xl p-2"><p class="text-[#FFC107] font-black" id="stat">READY</p><p class="text-[9px]">Status</p></div>
+<div class="bg-white/10 rounded-xl p-2"><p class="text-[#FFC107] font-black" id="eta">--</p><p class="text-[9px]">ETA</p></div>
+<div class="bg-white/10 rounded-xl p-2"><p class="text-[#FFC107] font-black" id="dist">--</p><p class="text-[9px]">Distance</p></div>
 </div>
+<input id="tInput" placeholder="Enter drop-off" class="w-full p-3 rounded-xl border text-sm mt-3">
+<button onclick="startTrack()" class="w-full mt-2 bg-[#0B2E6E] text-white py-3 rounded-xl font-black text-xs">START TRACKING</button>
+</div>
+<div style="background:black;color:#ffcc00;padding:12px;text-align:center;font-weight:bold;font-size:14px;margin-top:15px;">📍 Ambolong Zone 2, Aroroy | 📞 0938-570-2290</div>
 </main>
 <script>
 function go(name){
-  document.querySelectorAll('.pg').forEach(function(el){ el.style.display='none'; });
-  var target = document.getElementById('p-'+name);
-  if(target) target.style.display='block';
-  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('tab-btn-active'); });
-  var btn = document.getElementById('b-'+name);
-  if(btn) btn.classList.add('tab-btn-active');
-  setTimeout(function(){ try{ if(window.map1) map1.invalidateSize(); if(window.map2) map2.invalidateSize(); }catch(e){} },300);
+  document.querySelectorAll('.pg').forEach(el=>el.classList.remove('pg-active'));
+  document.getElementById('p-'+name).classList.add('pg-active');
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('tab-btn-active'));
+  document.getElementById('b-'+name).classList.add('tab-btn-active');
 }
-function sendBooking(){
-  var s = document.getElementById('bService').value;
-  var p = document.getElementById('bPickup').value;
-  var d = document.getElementById('bDrop').value;
-  var n = document.getElementById('bName').value;
-  if(!d ||!n){ alert('Paki-fill po ang Drop-off at Name/Phone 😊'); return; }
-  var msg = 'Hello po! RideMoto Aroroy Booking po 🛵\n\n'
-          + 'Name/Phone: ' + n + '\n'
-          + 'Service: ' + s + '\n'
-          + 'Pickup: ' + p + '\n'
-          + 'Drop-off: ' + d + '\n\n'
-          + 'Pa-confirm po if tama, and pa-send po ng exact landmark? Salamat po! 🙏';
-  var url = 'https://m.me/1297377406797691?text=' + encodeURIComponent(msg);
-  window.open(url, '_blank');
-}
-var map1, map2, rider, dest, line, timer;
-function initMapsSafe(){
-  try{
-    if(typeof L === 'undefined') throw 'offline';
-    if(!map1){
-      map1 = L.map('map1').setView([12.5122,123.4044],14);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18}).addTo(map1);
-      L.marker([12.5122,123.4044]).addTo(map1).bindPopup('<b>RIDEMOTO HUB</b><br>Ambolong').openPopup();
-    }
-    if(!map2){
-      map2 = L.map('map2').setView([12.5122,123.4044],14);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18}).addTo(map2);
-      rider = L.marker([12.5122,123.4044],{icon:L.divIcon({html:'<div style="background:#FFC107;border:3px solid #081B38;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center">🛵</div>',className:''})}).addTo(map2);
-      dest = L.marker([12.517,123.410]).addTo(map2);
-      line = L.polyline([[12.5122,123.4044],[12.517,123.410]],{color:'#FFC107',weight:5,dashArray:'8,8'}).addTo(map2);
-    }
-  }catch(err){
-    document.getElementById('map1').innerHTML='<div class="text-center p-4"><p class="font-black text-[#0B2E6E] text-xs">📴 OFFLINE</p><p class="text-[11px]">Booking works!</p></div>';
-  }
+async function sendBooking(){
+  var s=document.getElementById('bService').value;
+  var p=document.getElementById('bPickup').value;
+  var d=document.getElementById('bDrop').value;
+  var n=document.getElementById('bName').value;
+  if(!d||!n){ alert('Hello po! Paki-fill lang po ang Drop-off at Name/Phone. Salamat po!'); return; }
+  var msg='Hello po! RideMoto Aroroy Booking po 🛵\n\nName/Phone: '+n+'\nService: '+s+'\nPickup: '+p+'\nDrop-off: '+d;
+  try{ await navigator.clipboard.writeText(msg); }catch(e){}
+  alert('Maraming salamat po Ma\'am/Sir! 😊🙏\n\nNa-copy na po ang booking details.\n\nPagbukas ng Messenger:\n1. Paki-PASTE lang po\n2. Paki-tap ang SEND button (blue arrow)\n\nWe will get back to you as soon as possible while we process your booking information. We\'ll be right back in a jiffy! 🛵💛');
+  window.location.href='https://m.me/1297377406797691';
 }
 function startTrack(){
-  try{
-    if(!map2 ||!rider) return;
-    var d=document.getElementById('tInput').value||'Poblacion';
-    var dLat=12.5122+(Math.random()*0.02-0.01); var dLng=123.4044+(Math.random()*0.02-0.01);
-    dest.setLatLng([dLat,dLng]).bindPopup(d).openPopup();
-    line.setLatLngs([[12.5122,123.4044],[dLat,dLng]]);
-    map2.fitBounds(line.getBounds(),{padding:[20,20]});
-    var prog=0; clearInterval(timer);
-    document.getElementById('stat').innerText='ON THE WAY';
-    timer=setInterval(function(){
-      prog+=0.03; if(prog>=1){clearInterval(timer);document.getElementById('stat').innerText='ARRIVED';document.getElementById('eta').innerText='0 min';document.getElementById('dist').innerText='0 km';return;}
-      var lat=12.5122+(dLat-12.5122)*prog; var lng=123.4044+(dLng-123.4044)*prog;
-      rider.setLatLng([lat,lng]);
-      document.getElementById('eta').innerText=Math.ceil(8*(1-prog))+' mins';
-      document.getElementById('dist').innerText=(2.4*(1-prog)).toFixed(1)+' km';
-      if(prog>0.7) document.getElementById('stat').innerText='NEARBY';
-    },400);
-  }catch(e){}
+  var d=document.getElementById('tInput').value;
+  if(!d){ alert('Paki-enter po drop-off'); return; }
+  var prog=0;
+  document.getElementById('stat').innerText='ON THE WAY';
+  clearInterval(window.timer);
+  window.timer=setInterval(function(){
+    prog+=0.05;
+    if(prog>=1){ clearInterval(window.timer); document.getElementById('stat').innerText='ARRIVED'; document.getElementById('eta').innerText='0 min'; document.getElementById('dist').innerText='0 km'; return; }
+    document.getElementById('eta').innerText=Math.ceil(10*(1-prog))+' mins';
+    document.getElementById('dist').innerText=(2.5*(1-prog)).toFixed(1)+' km';
+  },400);
 }
-window.addEventListener('load', function(){ setTimeout(initMapsSafe, 800); });
 </script>
 </body>
 </html>
